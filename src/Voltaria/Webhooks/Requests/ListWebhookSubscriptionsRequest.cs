@@ -1,0 +1,23 @@
+using global::System.Text.Json.Serialization;
+using Voltaria.Core;
+
+namespace Voltaria;
+
+[Serializable]
+public record ListWebhookSubscriptionsRequest
+{
+    [JsonIgnore]
+    public int? Page { get; set; }
+
+    [JsonIgnore]
+    public int? PageSize { get; set; }
+
+    [JsonIgnore]
+    public WebhookEventTypeEnum? EventType { get; set; }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return JsonUtils.Serialize(this);
+    }
+}

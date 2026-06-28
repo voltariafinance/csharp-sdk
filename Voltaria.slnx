@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/Voltaria.Test/Voltaria.Test.csproj" />
+  <Project Path="src/Voltaria/Voltaria.csproj" />
+</Solution>
