@@ -13,6 +13,269 @@ public partial class LoansClient : ILoansClient
     }
 
     private async Task<
+        WithRawResponse<PaginatedResponseLoanReviewRequestResponse>
+    > ListLoanReviewRequestsAsyncCore(
+        ListLoanReviewRequestsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _queryString = new Voltaria.Core.QueryStringBuilder.Builder(capacity: 6)
+            .Add("loan_id", request.LoanId)
+            .Add("client_id", request.ClientId)
+            .Add("page", request.Page)
+            .Add("page_size", request.PageSize)
+            .Add("order_by", request.OrderBy)
+            .Add("q", request.Q)
+            .MergeAdditional(options?.AdditionalQueryParameters)
+            .Build();
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Get,
+                    Path = "v2/loans/review-requests",
+                    QueryString = _queryString,
+                    Headers = _headers,
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData =
+                    JsonUtils.Deserialize<PaginatedResponseLoanReviewRequestResponse>(
+                        responseBody
+                    )!;
+                return new WithRawResponse<PaginatedResponseLoanReviewRequestResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    private async Task<WithRawResponse<LoanReviewRequestResponse>> CreateLoanReviewRequestAsyncCore(
+        LoanReviewRequestCreatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Post,
+                    Path = "v2/loans/review-requests",
+                    Body = request,
+                    Headers = _headers,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData = JsonUtils.Deserialize<LoanReviewRequestResponse>(responseBody)!;
+                return new WithRawResponse<LoanReviewRequestResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 404:
+                        throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 409:
+                        throw new ConflictError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    private async Task<WithRawResponse<LoanReviewRequestResponse>> GetLoanReviewRequestAsyncCore(
+        GetLoanReviewRequestRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Get,
+                    Path = string.Format(
+                        "v2/loans/review-requests/{0}",
+                        ValueConvert.ToPathParameterString(request.RequestId)
+                    ),
+                    Headers = _headers,
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData = JsonUtils.Deserialize<LoanReviewRequestResponse>(responseBody)!;
+                return new WithRawResponse<LoanReviewRequestResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 404:
+                        throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    private async Task<
         WithRawResponse<PaginatedResponseLoanResponseWithClientInfo>
     > ListLoansAsyncCore(
         ListLoansRequest request,
@@ -621,6 +884,61 @@ public partial class LoansClient : ILoansClient
                 responseBody
             );
         }
+    }
+
+    /// <summary>
+    /// List loan review requests for your partner account, optionally filtered by loan ID or client ID.
+    /// </summary>
+    /// <example><code>
+    /// await client.Loans.ListLoanReviewRequestsAsync(new ListLoanReviewRequestsRequest());
+    /// </code></example>
+    public WithRawResponseTask<PaginatedResponseLoanReviewRequestResponse> ListLoanReviewRequestsAsync(
+        ListLoanReviewRequestsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<PaginatedResponseLoanReviewRequestResponse>(
+            ListLoanReviewRequestsAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
+    /// Ask Voltaria to review a not-yet-disbursed (pending or pre-approved) loan before disbursement.
+    /// </summary>
+    /// <example><code>
+    /// await client.Loans.CreateLoanReviewRequestAsync(
+    ///     new LoanReviewRequestCreatePayload { LoanId = "loan_1234567890abcdef" }
+    /// );
+    /// </code></example>
+    public WithRawResponseTask<LoanReviewRequestResponse> CreateLoanReviewRequestAsync(
+        LoanReviewRequestCreatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<LoanReviewRequestResponse>(
+            CreateLoanReviewRequestAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
+    /// Retrieve a specific loan review request by its ID.
+    /// </summary>
+    /// <example><code>
+    /// await client.Loans.GetLoanReviewRequestAsync(
+    ///     new GetLoanReviewRequestRequest { RequestId = "request_id" }
+    /// );
+    /// </code></example>
+    public WithRawResponseTask<LoanReviewRequestResponse> GetLoanReviewRequestAsync(
+        GetLoanReviewRequestRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<LoanReviewRequestResponse>(
+            GetLoanReviewRequestAsyncCore(request, options, cancellationToken)
+        );
     }
 
     /// <summary>

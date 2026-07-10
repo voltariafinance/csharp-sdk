@@ -3,11 +3,11 @@ using Voltaria;
 using Voltaria.Test.Unit.MockServer;
 using Voltaria.Test.Utils;
 
-namespace Voltaria.Test.Unit.MockServer.Documents;
+namespace Voltaria.Test.Unit.MockServer.Collections;
 
 [TestFixture]
 [Parallelizable(ParallelScope.Self)]
-public class ListDocumentsTest : BaseMockServerTest
+public class ListCollectionActionLogsTest : BaseMockServerTest
 {
     [NUnit.Framework.Test]
     public async Task MockServerTest_1()
@@ -17,33 +17,29 @@ public class ListDocumentsTest : BaseMockServerTest
               "items": [
                 {
                   "id": "id",
-                  "category": "category",
-                  "file_name": "file_name",
-                  "file_type": "file_type",
+                  "collection_action_id": "collection_action_id",
+                  "action_type": "email",
+                  "action_name": "action_name",
+                  "status": "pending",
                   "client_id": "client_id",
-                  "file_url": "file_url",
                   "loan_id": "loan_id",
                   "installment_id": "installment_id",
-                  "folder_path": "folder_path",
-                  "document_date": "2023-01-15",
-                  "expiry_date": "2023-01-15",
-                  "distribution_id": "distribution_id",
-                  "created_at": "2024-01-15T09:30:00.000Z"
+                  "flag": true,
+                  "notes": "notes",
+                  "scheduled_for": "2024-01-15T09:30:00.000Z"
                 },
                 {
                   "id": "id",
-                  "category": "category",
-                  "file_name": "file_name",
-                  "file_type": "file_type",
+                  "collection_action_id": "collection_action_id",
+                  "action_type": "email",
+                  "action_name": "action_name",
+                  "status": "pending",
                   "client_id": "client_id",
-                  "file_url": "file_url",
                   "loan_id": "loan_id",
                   "installment_id": "installment_id",
-                  "folder_path": "folder_path",
-                  "document_date": "2023-01-15",
-                  "expiry_date": "2023-01-15",
-                  "distribution_id": "distribution_id",
-                  "created_at": "2024-01-15T09:30:00.000Z"
+                  "flag": true,
+                  "notes": "notes",
+                  "scheduled_for": "2024-01-15T09:30:00.000Z"
                 }
               ],
               "page": 1,
@@ -57,7 +53,12 @@ public class ListDocumentsTest : BaseMockServerTest
             """;
 
         Server
-            .Given(WireMock.RequestBuilders.Request.Create().WithPath("/v2/documents").UsingGet())
+            .Given(
+                WireMock
+                    .RequestBuilders.Request.Create()
+                    .WithPath("/v2/collection-actions/logs")
+                    .UsingGet()
+            )
             .RespondWith(
                 WireMock
                     .ResponseBuilders.Response.Create()
@@ -65,7 +66,9 @@ public class ListDocumentsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Documents.ListDocumentsAsync(new ListDocumentsRequest());
+        var response = await Client.Collections.ListCollectionActionLogsAsync(
+            new ListCollectionActionLogsRequest()
+        );
         JsonAssert.AreEqual(response, mockResponse);
     }
 
@@ -76,19 +79,17 @@ public class ListDocumentsTest : BaseMockServerTest
             {
               "items": [
                 {
-                  "id": "id",
-                  "category": "category",
-                  "file_name": "file_name",
-                  "file_type": "file_type",
-                  "client_id": "client_id",
-                  "file_url": "file_url",
-                  "loan_id": "loan_id",
-                  "installment_id": "installment_id",
-                  "folder_path": "folder_path",
-                  "document_date": "2023-01-15",
-                  "expiry_date": "2023-01-15",
-                  "distribution_id": "distribution_id",
-                  "created_at": "2024-01-15T09:30:00.000Z"
+                  "id": "collection_action_log_123",
+                  "collection_action_id": "collection_action_123",
+                  "action_type": "email",
+                  "action_name": "Overdue reminder call",
+                  "status": "pending",
+                  "client_id": "client_123",
+                  "loan_id": "loan_456",
+                  "installment_id": "installment_789",
+                  "flag": false,
+                  "notes": "notes",
+                  "scheduled_for": "2026-07-10T09:00:00.000Z"
                 }
               ],
               "page": 1,
@@ -102,7 +103,12 @@ public class ListDocumentsTest : BaseMockServerTest
             """;
 
         Server
-            .Given(WireMock.RequestBuilders.Request.Create().WithPath("/v2/documents").UsingGet())
+            .Given(
+                WireMock
+                    .RequestBuilders.Request.Create()
+                    .WithPath("/v2/collection-actions/logs")
+                    .UsingGet()
+            )
             .RespondWith(
                 WireMock
                     .ResponseBuilders.Response.Create()
@@ -110,7 +116,9 @@ public class ListDocumentsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Documents.ListDocumentsAsync(new ListDocumentsRequest());
+        var response = await Client.Collections.ListCollectionActionLogsAsync(
+            new ListCollectionActionLogsRequest()
+        );
         JsonAssert.AreEqual(response, mockResponse);
     }
 }

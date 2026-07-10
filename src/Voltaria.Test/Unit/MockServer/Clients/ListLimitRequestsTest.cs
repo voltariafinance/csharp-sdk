@@ -23,6 +23,7 @@ public class ListLimitRequestsTest : BaseMockServerTest
                   "reason": "reason",
                   "response": "response",
                   "waiver_id": "waiver_id",
+                  "source": "partner",
                   "created_at": "2024-01-15T09:30:00.000Z"
                 },
                 {
@@ -33,6 +34,7 @@ public class ListLimitRequestsTest : BaseMockServerTest
                   "reason": "reason",
                   "response": "response",
                   "waiver_id": "waiver_id",
+                  "source": "partner",
                   "created_at": "2024-01-15T09:30:00.000Z"
                 }
               ],
@@ -78,6 +80,7 @@ public class ListLimitRequestsTest : BaseMockServerTest
                   "reason": "Need more credit for business expansion",
                   "response": "response",
                   "waiver_id": "waiver_id",
+                  "source": "partner",
                   "created_at": "2023-10-01T12:00:00.000Z"
                 }
               ],

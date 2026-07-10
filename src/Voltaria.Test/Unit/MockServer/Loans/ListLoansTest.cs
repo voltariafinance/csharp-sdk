@@ -43,7 +43,9 @@ public class ListLoansTest : BaseMockServerTest
                     "jurisdiction": "eu",
                     "company_number": "company_number",
                     "status": "active"
-                  }
+                  },
+                  "outstanding_principal": "outstanding_principal",
+                  "remaining_amount": "remaining_amount"
                 },
                 {
                   "id": "id",
@@ -73,7 +75,9 @@ public class ListLoansTest : BaseMockServerTest
                     "jurisdiction": "eu",
                     "company_number": "company_number",
                     "status": "active"
-                  }
+                  },
+                  "outstanding_principal": "outstanding_principal",
+                  "remaining_amount": "remaining_amount"
                 }
               ],
               "page": 1,
@@ -130,7 +134,9 @@ public class ListLoansTest : BaseMockServerTest
                     "type": "corporate",
                     "jurisdiction": "eu",
                     "status": "active"
-                  }
+                  },
+                  "outstanding_principal": "outstanding_principal",
+                  "remaining_amount": "remaining_amount"
                 }
               ],
               "page": 1,

@@ -78,6 +78,12 @@ public record DocumentResponse : IJsonOnDeserialized
     public DateOnly? ExpiryDate { get; set; }
 
     /// <summary>
+    /// The ID of the associated distribution (coupon), if applicable
+    /// </summary>
+    [JsonPropertyName("distribution_id")]
+    public string? DistributionId { get; set; }
+
+    /// <summary>
     /// The date and time when the document was created
     /// </summary>
     [JsonPropertyName("created_at")]

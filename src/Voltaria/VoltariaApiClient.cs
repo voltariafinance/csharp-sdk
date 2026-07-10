@@ -36,6 +36,7 @@ public partial class VoltariaApiClient : IVoltariaApiClient
         Clients = new ClientsClient(_client);
         Sandbox = new SandboxClient(_client);
         Accounts = new AccountsClient(_client);
+        Collections = new CollectionsClient(_client);
         Documents = new DocumentsClient(_client);
         Investors = new InvestorsClient(_client);
         Installments = new InstallmentsClient(_client);
@@ -51,6 +52,8 @@ public partial class VoltariaApiClient : IVoltariaApiClient
     public ISandboxClient Sandbox { get; }
 
     public IAccountsClient Accounts { get; }
+
+    public ICollectionsClient Collections { get; }
 
     public IDocumentsClient Documents { get; }
 

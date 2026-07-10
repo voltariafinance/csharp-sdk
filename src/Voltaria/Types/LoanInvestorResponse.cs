@@ -120,6 +120,18 @@ public record LoanInvestorResponse : IJsonOnDeserialized
     public required ClientBaseInfo Client { get; set; }
 
     /// <summary>
+    /// Remaining principal for installments with status active or overdue, net of any repayments already made
+    /// </summary>
+    [JsonPropertyName("outstanding_principal")]
+    public string? OutstandingPrincipal { get; set; }
+
+    /// <summary>
+    /// Remaining amount (principal and interest) for installments with status active or overdue, net of any repayments already made
+    /// </summary>
+    [JsonPropertyName("remaining_amount")]
+    public string? RemainingAmount { get; set; }
+
+    /// <summary>
     /// Whether the loan disbursement is paid directly to the client (as opposed to the partner).
     /// </summary>
     [JsonPropertyName("payment_to_the_client")]

@@ -3,34 +3,32 @@ using Voltaria;
 using Voltaria.Test.Unit.MockServer;
 using Voltaria.Test.Utils;
 
-namespace Voltaria.Test.Unit.MockServer.Clients;
+namespace Voltaria.Test.Unit.MockServer.Loans;
 
 [TestFixture]
 [Parallelizable(ParallelScope.Self)]
-public class CreateLimitRequestTest : BaseMockServerTest
+public class CreateLoanReviewRequestTest : BaseMockServerTest
 {
     [NUnit.Framework.Test]
     public async Task MockServerTest_1()
     {
         const string requestJson = """
             {
-              "client_id": "client_id",
-              "requested_limit": 1.1,
-              "reason": "reason"
+              "loan_id": "loan_id"
             }
             """;
 
         const string mockResponse = """
             {
               "id": "id",
+              "loan_id": "loan_id",
               "client_id": "client_id",
               "status": "pending",
-              "requested_limit": "requested_limit",
-              "reason": "reason",
+              "notes": "notes",
               "response": "response",
-              "waiver_id": "waiver_id",
-              "source": "partner",
-              "created_at": "2024-01-15T09:30:00.000Z"
+              "reviewed_at": "2024-01-15T09:30:00.000Z",
+              "created_at": "2024-01-15T09:30:00.000Z",
+              "updated_at": "2024-01-15T09:30:00.000Z"
             }
             """;
 
@@ -38,7 +36,7 @@ public class CreateLimitRequestTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/clients/limit-requests")
+                    .WithPath("/v2/loans/review-requests")
                     .WithHeader("Content-Type", "application/json")
                     .UsingPost()
                     .WithBodyAsJson(requestJson)
@@ -50,14 +48,8 @@ public class CreateLimitRequestTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Clients.CreateLimitRequestAsync(
-            new LimitRequestCreatePayload
-            {
-                ClientId = "client_id",
-                RequestedLimit = 1.1,
-                Reason = "reason",
-                WaiverRequest = null,
-            }
+        var response = await Client.Loans.CreateLoanReviewRequestAsync(
+            new LoanReviewRequestCreatePayload { LoanId = "loan_id", Notes = null }
         );
         JsonAssert.AreEqual(response, mockResponse);
     }
@@ -67,23 +59,21 @@ public class CreateLimitRequestTest : BaseMockServerTest
     {
         const string requestJson = """
             {
-              "client_id": "client_1234567890abcdef",
-              "requested_limit": 1.1,
-              "reason": "Need more credit for business expansion"
+              "loan_id": "loan_1234567890abcdef"
             }
             """;
 
         const string mockResponse = """
             {
-              "id": "lr_1234567890abcdef",
+              "id": "loan_review_1234567890abcdef",
+              "loan_id": "loan_1234567890abcdef",
               "client_id": "client_1234567890abcdef",
               "status": "pending",
-              "requested_limit": "requested_limit",
-              "reason": "Need more credit for business expansion",
+              "notes": "notes",
               "response": "response",
-              "waiver_id": "waiver_id",
-              "source": "partner",
-              "created_at": "2023-10-01T12:00:00.000Z"
+              "reviewed_at": "2024-01-15T09:30:00.000Z",
+              "created_at": "2026-06-29T12:00:00.000Z",
+              "updated_at": "2026-06-29T12:00:00.000Z"
             }
             """;
 
@@ -91,7 +81,7 @@ public class CreateLimitRequestTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/clients/limit-requests")
+                    .WithPath("/v2/loans/review-requests")
                     .WithHeader("Content-Type", "application/json")
                     .UsingPost()
                     .WithBodyAsJson(requestJson)
@@ -103,13 +93,8 @@ public class CreateLimitRequestTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Clients.CreateLimitRequestAsync(
-            new LimitRequestCreatePayload
-            {
-                ClientId = "client_1234567890abcdef",
-                RequestedLimit = 1.1,
-                Reason = "Need more credit for business expansion",
-            }
+        var response = await Client.Loans.CreateLoanReviewRequestAsync(
+            new LoanReviewRequestCreatePayload { LoanId = "loan_1234567890abcdef" }
         );
         JsonAssert.AreEqual(response, mockResponse);
     }

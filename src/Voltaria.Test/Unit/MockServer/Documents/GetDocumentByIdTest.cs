@@ -25,6 +25,7 @@ public class GetDocumentByIdTest : BaseMockServerTest
               "folder_path": "folder_path",
               "document_date": "2023-01-15",
               "expiry_date": "2023-01-15",
+              "distribution_id": "distribution_id",
               "created_at": "2024-01-15T09:30:00.000Z"
             }
             """;
@@ -65,6 +66,7 @@ public class GetDocumentByIdTest : BaseMockServerTest
               "folder_path": "folder_path",
               "document_date": "2023-01-15",
               "expiry_date": "2023-01-15",
+              "distribution_id": "distribution_id",
               "created_at": "2024-01-15T09:30:00.000Z"
             }
             """;

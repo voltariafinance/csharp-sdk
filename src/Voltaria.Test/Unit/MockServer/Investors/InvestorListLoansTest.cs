@@ -44,6 +44,8 @@ public class InvestorListLoansTest : BaseMockServerTest
                     "company_number": "company_number",
                     "status": "active"
                   },
+                  "outstanding_principal": "outstanding_principal",
+                  "remaining_amount": "remaining_amount",
                   "payment_to_the_client": true
                 },
                 {
@@ -75,6 +77,8 @@ public class InvestorListLoansTest : BaseMockServerTest
                     "company_number": "company_number",
                     "status": "active"
                   },
+                  "outstanding_principal": "outstanding_principal",
+                  "remaining_amount": "remaining_amount",
                   "payment_to_the_client": true
                 }
               ],
@@ -137,6 +141,8 @@ public class InvestorListLoansTest : BaseMockServerTest
                     "jurisdiction": "eu",
                     "status": "active"
                   },
+                  "outstanding_principal": "outstanding_principal",
+                  "remaining_amount": "remaining_amount",
                   "payment_to_the_client": true
                 }
               ],

@@ -3,11 +3,11 @@ using Voltaria;
 using Voltaria.Test.Unit.MockServer;
 using Voltaria.Test.Utils;
 
-namespace Voltaria.Test.Unit.MockServer.Partners;
+namespace Voltaria.Test.Unit.MockServer.Clients;
 
 [TestFixture]
 [Parallelizable(ParallelScope.Self)]
-public class ListPartnerWaterfallsTest : BaseMockServerTest
+public class ListClientPortalUsersTest : BaseMockServerTest
 {
     [NUnit.Framework.Test]
     public async Task MockServerTest_1()
@@ -18,26 +18,44 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
                 {
                   "id": "id",
                   "partner_id": "partner_id",
-                  "name": "name",
-                  "date": "2023-01-15",
+                  "client_id": "client_id",
+                  "email": "email",
+                  "role_id": "role_id",
+                  "role": {
+                    "id": "id",
+                    "name": "name",
+                    "type": "type"
+                  },
                   "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
+                  "is_email_verified": true,
+                  "kyc_status": "not_started",
+                  "first_name": "first_name",
+                  "last_name": "last_name",
+                  "phone": "phone",
+                  "is_2fa_enabled": true,
+                  "is_2fa_required": true,
                   "created_at": "2024-01-15T09:30:00.000Z",
                   "updated_at": "2024-01-15T09:30:00.000Z"
                 },
                 {
                   "id": "id",
                   "partner_id": "partner_id",
-                  "name": "name",
-                  "date": "2023-01-15",
+                  "client_id": "client_id",
+                  "email": "email",
+                  "role_id": "role_id",
+                  "role": {
+                    "id": "id",
+                    "name": "name",
+                    "type": "type"
+                  },
                   "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
+                  "is_email_verified": true,
+                  "kyc_status": "not_started",
+                  "first_name": "first_name",
+                  "last_name": "last_name",
+                  "phone": "phone",
+                  "is_2fa_enabled": true,
+                  "is_2fa_required": true,
                   "created_at": "2024-01-15T09:30:00.000Z",
                   "updated_at": "2024-01-15T09:30:00.000Z"
                 }
@@ -56,7 +74,7 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/partners/waterfalls")
+                    .WithPath("/v2/clients/client_id/users")
                     .UsingGet()
             )
             .RespondWith(
@@ -66,8 +84,8 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Partners.ListPartnerWaterfallsAsync(
-            new ListPartnerWaterfallsRequest()
+        var response = await Client.Clients.ListClientPortalUsersAsync(
+            new ListClientPortalUsersRequest { ClientId = "client_id" }
         );
         JsonAssert.AreEqual(response, mockResponse);
     }
@@ -79,17 +97,26 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             {
               "items": [
                 {
-                  "id": "id",
-                  "partner_id": "partner_id",
-                  "name": "name",
-                  "date": "2023-01-15",
+                  "id": "cu_abc123",
+                  "partner_id": "partner_abc123",
+                  "client_id": "client_abc123",
+                  "email": "jane.doe@acme.com",
+                  "role_id": "role_abc123",
+                  "role": {
+                    "id": "id",
+                    "name": "name",
+                    "type": "type"
+                  },
                   "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
-                  "created_at": "2024-01-15T09:30:00.000Z",
-                  "updated_at": "2024-01-15T09:30:00.000Z"
+                  "is_email_verified": true,
+                  "kyc_status": "not_started",
+                  "first_name": "first_name",
+                  "last_name": "last_name",
+                  "phone": "phone",
+                  "is_2fa_enabled": false,
+                  "is_2fa_required": false,
+                  "created_at": "2024-01-15T10:30:00.000Z",
+                  "updated_at": "2024-01-15T10:30:00.000Z"
                 }
               ],
               "page": 1,
@@ -106,7 +133,7 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/partners/waterfalls")
+                    .WithPath("/v2/clients/client_id/users")
                     .UsingGet()
             )
             .RespondWith(
@@ -116,8 +143,8 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Partners.ListPartnerWaterfallsAsync(
-            new ListPartnerWaterfallsRequest()
+        var response = await Client.Clients.ListClientPortalUsersAsync(
+            new ListClientPortalUsersRequest { ClientId = "client_id" }
         );
         JsonAssert.AreEqual(response, mockResponse);
     }

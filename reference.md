@@ -503,6 +503,62 @@ await client.Clients.RejectOnboardingAsync(new RejectOnboardingRequest { ClientI
 </dl>
 </details>
 
+<details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">ListClientPortalUsersAsync</a>(ListClientPortalUsersRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseClientUserResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Paginated list of portal users belonging to a client.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Clients.ListClientPortalUsersAsync(
+    new ListClientPortalUsersRequest { ClientId = "client_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListClientPortalUsersRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">AddClientPortalUserAsync</a>(ClientUserInviteRequest { ... }) -> WithRawResponseTask&lt;ClientUserResponse&gt;</code></summary>
 <dl>
 <dd>
@@ -1173,6 +1229,175 @@ await client.Accounts.GetClientAccountAsync(
 <dd>
 
 **request:** `GetClientAccountRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Collections
+<details><summary><code>client.Collections.<a href="/src/Voltaria/Collections/CollectionsClient.cs">ListCollectionActionsAsync</a>(ListCollectionActionsRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseCollectionActionResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve all collection actions configured for your partner account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Collections.ListCollectionActionsAsync(new ListCollectionActionsRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListCollectionActionsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Collections.<a href="/src/Voltaria/Collections/CollectionsClient.cs">ListCollectionActionLogsAsync</a>(ListCollectionActionLogsRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseCollectionActionLogResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve collection action logs for your partner account. Supports filtering by client, loan, installment, status, or action type.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Collections.ListCollectionActionLogsAsync(new ListCollectionActionLogsRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListCollectionActionLogsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Collections.<a href="/src/Voltaria/Collections/CollectionsClient.cs">UpdateCollectionActionLogAsync</a>(CollectionActionLogUpdatePayload { ... }) -> WithRawResponseTask&lt;CollectionActionLogResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the status and notes of a collection action log.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Collections.UpdateCollectionActionLogAsync(
+    new CollectionActionLogUpdatePayload
+    {
+        LogId = "log_id",
+        Status = CollectionActionLogUpdatePayloadStatus.Completed,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CollectionActionLogUpdatePayload` 
     
 </dd>
 </dl>
@@ -2245,6 +2470,172 @@ await client.Installments.DeleteInstallmentAsync(
 </details>
 
 ## Loans
+<details><summary><code>client.Loans.<a href="/src/Voltaria/Loans/LoansClient.cs">ListLoanReviewRequestsAsync</a>(ListLoanReviewRequestsRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseLoanReviewRequestResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List loan review requests for your partner account, optionally filtered by loan ID or client ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Loans.ListLoanReviewRequestsAsync(new ListLoanReviewRequestsRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListLoanReviewRequestsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Loans.<a href="/src/Voltaria/Loans/LoansClient.cs">CreateLoanReviewRequestAsync</a>(LoanReviewRequestCreatePayload { ... }) -> WithRawResponseTask&lt;LoanReviewRequestResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Ask Voltaria to review a not-yet-disbursed (pending or pre-approved) loan before disbursement.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Loans.CreateLoanReviewRequestAsync(
+    new LoanReviewRequestCreatePayload { LoanId = "loan_1234567890abcdef" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LoanReviewRequestCreatePayload` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Loans.<a href="/src/Voltaria/Loans/LoansClient.cs">GetLoanReviewRequestAsync</a>(GetLoanReviewRequestRequest { ... }) -> WithRawResponseTask&lt;LoanReviewRequestResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a specific loan review request by its ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Loans.GetLoanReviewRequestAsync(
+    new GetLoanReviewRequestRequest { RequestId = "request_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetLoanReviewRequestRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Loans.<a href="/src/Voltaria/Loans/LoansClient.cs">ListLoansAsync</a>(ListLoansRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseLoanResponseWithClientInfo&gt;</code></summary>
 <dl>
 <dd>

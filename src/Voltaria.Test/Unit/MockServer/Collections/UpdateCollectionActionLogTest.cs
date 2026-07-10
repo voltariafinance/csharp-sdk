@@ -3,34 +3,34 @@ using Voltaria;
 using Voltaria.Test.Unit.MockServer;
 using Voltaria.Test.Utils;
 
-namespace Voltaria.Test.Unit.MockServer.Clients;
+namespace Voltaria.Test.Unit.MockServer.Collections;
 
 [TestFixture]
 [Parallelizable(ParallelScope.Self)]
-public class CreateLimitRequestTest : BaseMockServerTest
+public class UpdateCollectionActionLogTest : BaseMockServerTest
 {
     [NUnit.Framework.Test]
     public async Task MockServerTest_1()
     {
         const string requestJson = """
             {
-              "client_id": "client_id",
-              "requested_limit": 1.1,
-              "reason": "reason"
+              "status": "completed"
             }
             """;
 
         const string mockResponse = """
             {
               "id": "id",
-              "client_id": "client_id",
+              "collection_action_id": "collection_action_id",
+              "action_type": "email",
+              "action_name": "action_name",
               "status": "pending",
-              "requested_limit": "requested_limit",
-              "reason": "reason",
-              "response": "response",
-              "waiver_id": "waiver_id",
-              "source": "partner",
-              "created_at": "2024-01-15T09:30:00.000Z"
+              "client_id": "client_id",
+              "loan_id": "loan_id",
+              "installment_id": "installment_id",
+              "flag": true,
+              "notes": "notes",
+              "scheduled_for": "2024-01-15T09:30:00.000Z"
             }
             """;
 
@@ -38,9 +38,9 @@ public class CreateLimitRequestTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/clients/limit-requests")
+                    .WithPath("/v2/collection-actions/logs/log_id")
                     .WithHeader("Content-Type", "application/json")
-                    .UsingPost()
+                    .UsingPatch()
                     .WithBodyAsJson(requestJson)
             )
             .RespondWith(
@@ -50,13 +50,12 @@ public class CreateLimitRequestTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Clients.CreateLimitRequestAsync(
-            new LimitRequestCreatePayload
+        var response = await Client.Collections.UpdateCollectionActionLogAsync(
+            new CollectionActionLogUpdatePayload
             {
-                ClientId = "client_id",
-                RequestedLimit = 1.1,
-                Reason = "reason",
-                WaiverRequest = null,
+                LogId = "log_id",
+                Status = CollectionActionLogUpdatePayloadStatus.Completed,
+                Notes = null,
             }
         );
         JsonAssert.AreEqual(response, mockResponse);
@@ -67,23 +66,23 @@ public class CreateLimitRequestTest : BaseMockServerTest
     {
         const string requestJson = """
             {
-              "client_id": "client_1234567890abcdef",
-              "requested_limit": 1.1,
-              "reason": "Need more credit for business expansion"
+              "status": "completed"
             }
             """;
 
         const string mockResponse = """
             {
-              "id": "lr_1234567890abcdef",
-              "client_id": "client_1234567890abcdef",
+              "id": "collection_action_log_123",
+              "collection_action_id": "collection_action_123",
+              "action_type": "email",
+              "action_name": "Overdue reminder call",
               "status": "pending",
-              "requested_limit": "requested_limit",
-              "reason": "Need more credit for business expansion",
-              "response": "response",
-              "waiver_id": "waiver_id",
-              "source": "partner",
-              "created_at": "2023-10-01T12:00:00.000Z"
+              "client_id": "client_123",
+              "loan_id": "loan_456",
+              "installment_id": "installment_789",
+              "flag": false,
+              "notes": "notes",
+              "scheduled_for": "2026-07-10T09:00:00.000Z"
             }
             """;
 
@@ -91,9 +90,9 @@ public class CreateLimitRequestTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/clients/limit-requests")
+                    .WithPath("/v2/collection-actions/logs/log_id")
                     .WithHeader("Content-Type", "application/json")
-                    .UsingPost()
+                    .UsingPatch()
                     .WithBodyAsJson(requestJson)
             )
             .RespondWith(
@@ -103,12 +102,11 @@ public class CreateLimitRequestTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Clients.CreateLimitRequestAsync(
-            new LimitRequestCreatePayload
+        var response = await Client.Collections.UpdateCollectionActionLogAsync(
+            new CollectionActionLogUpdatePayload
             {
-                ClientId = "client_1234567890abcdef",
-                RequestedLimit = 1.1,
-                Reason = "Need more credit for business expansion",
+                LogId = "log_id",
+                Status = CollectionActionLogUpdatePayloadStatus.Completed,
             }
         );
         JsonAssert.AreEqual(response, mockResponse);

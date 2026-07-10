@@ -89,6 +89,12 @@ public record ClientAccountResponse : IJsonOnDeserialized
     [JsonPropertyName("status")]
     public required AccountStatusEnum Status { get; set; }
 
+    /// <summary>
+    /// Timestamp when the account was created.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public required DateTime CreatedAt { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

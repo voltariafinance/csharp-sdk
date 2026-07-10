@@ -54,6 +54,12 @@ public record LimitRequestResponse : IJsonOnDeserialized
     public string? WaiverId { get; set; }
 
     /// <summary>
+    /// The origin of the request. 'partner' indicates the request was submitted by your account; 'internal' indicates it was initiated by Winyield on your behalf.
+    /// </summary>
+    [JsonPropertyName("source")]
+    public required LimitRequestSourceEnum Source { get; set; }
+
+    /// <summary>
     /// The timestamp when the limit request was created
     /// </summary>
     [JsonPropertyName("created_at")]

@@ -90,11 +90,11 @@ public class AddClientPortalUserTest : BaseMockServerTest
 
         const string mockResponse = """
             {
-              "id": "id",
-              "partner_id": "partner_id",
-              "client_id": "client_id",
-              "email": "email",
-              "role_id": "role_id",
+              "id": "cu_abc123",
+              "partner_id": "partner_abc123",
+              "client_id": "client_abc123",
+              "email": "jane.doe@acme.com",
+              "role_id": "role_abc123",
               "role": {
                 "id": "id",
                 "name": "name",
@@ -106,10 +106,10 @@ public class AddClientPortalUserTest : BaseMockServerTest
               "first_name": "first_name",
               "last_name": "last_name",
               "phone": "phone",
-              "is_2fa_enabled": true,
-              "is_2fa_required": true,
-              "created_at": "2024-01-15T09:30:00.000Z",
-              "updated_at": "2024-01-15T09:30:00.000Z"
+              "is_2fa_enabled": false,
+              "is_2fa_required": false,
+              "created_at": "2024-01-15T10:30:00.000Z",
+              "updated_at": "2024-01-15T10:30:00.000Z"
             }
             """;
 

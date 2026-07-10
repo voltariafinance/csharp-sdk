@@ -5,6 +5,7 @@ public partial interface IVoltariaApiClient
     public IClientsClient Clients { get; }
     public ISandboxClient Sandbox { get; }
     public IAccountsClient Accounts { get; }
+    public ICollectionsClient Collections { get; }
     public IDocumentsClient Documents { get; }
     public IInvestorsClient Investors { get; }
     public IInstallmentsClient Installments { get; }

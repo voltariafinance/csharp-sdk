@@ -32,7 +32,8 @@ public class GetClientAccountTest : BaseMockServerTest
                 "state": "state",
                 "line1": "line1"
               },
-              "status": "active"
+              "status": "active",
+              "created_at": "2024-01-15T09:30:00.000Z"
             }
             """;
 
@@ -79,7 +80,8 @@ public class GetClientAccountTest : BaseMockServerTest
                 "state": "state",
                 "line1": "123 Main St"
               },
-              "status": "pending"
+              "status": "pending",
+              "created_at": "2024-01-15T10:30:00.000Z"
             }
             """;
 

@@ -3,11 +3,11 @@ using Voltaria;
 using Voltaria.Test.Unit.MockServer;
 using Voltaria.Test.Utils;
 
-namespace Voltaria.Test.Unit.MockServer.Partners;
+namespace Voltaria.Test.Unit.MockServer.Loans;
 
 [TestFixture]
 [Parallelizable(ParallelScope.Self)]
-public class ListPartnerWaterfallsTest : BaseMockServerTest
+public class ListLoanReviewRequestsTest : BaseMockServerTest
 {
     [NUnit.Framework.Test]
     public async Task MockServerTest_1()
@@ -17,27 +17,23 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
               "items": [
                 {
                   "id": "id",
-                  "partner_id": "partner_id",
-                  "name": "name",
-                  "date": "2023-01-15",
+                  "loan_id": "loan_id",
+                  "client_id": "client_id",
                   "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
+                  "notes": "notes",
+                  "response": "response",
+                  "reviewed_at": "2024-01-15T09:30:00.000Z",
                   "created_at": "2024-01-15T09:30:00.000Z",
                   "updated_at": "2024-01-15T09:30:00.000Z"
                 },
                 {
                   "id": "id",
-                  "partner_id": "partner_id",
-                  "name": "name",
-                  "date": "2023-01-15",
+                  "loan_id": "loan_id",
+                  "client_id": "client_id",
                   "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
+                  "notes": "notes",
+                  "response": "response",
+                  "reviewed_at": "2024-01-15T09:30:00.000Z",
                   "created_at": "2024-01-15T09:30:00.000Z",
                   "updated_at": "2024-01-15T09:30:00.000Z"
                 }
@@ -56,7 +52,7 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/partners/waterfalls")
+                    .WithPath("/v2/loans/review-requests")
                     .UsingGet()
             )
             .RespondWith(
@@ -66,8 +62,8 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Partners.ListPartnerWaterfallsAsync(
-            new ListPartnerWaterfallsRequest()
+        var response = await Client.Loans.ListLoanReviewRequestsAsync(
+            new ListLoanReviewRequestsRequest()
         );
         JsonAssert.AreEqual(response, mockResponse);
     }
@@ -79,17 +75,15 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             {
               "items": [
                 {
-                  "id": "id",
-                  "partner_id": "partner_id",
-                  "name": "name",
-                  "date": "2023-01-15",
+                  "id": "loan_review_1234567890abcdef",
+                  "loan_id": "loan_1234567890abcdef",
+                  "client_id": "client_1234567890abcdef",
                   "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
-                  "created_at": "2024-01-15T09:30:00.000Z",
-                  "updated_at": "2024-01-15T09:30:00.000Z"
+                  "notes": "notes",
+                  "response": "response",
+                  "reviewed_at": "2024-01-15T09:30:00.000Z",
+                  "created_at": "2026-06-29T12:00:00.000Z",
+                  "updated_at": "2026-06-29T12:00:00.000Z"
                 }
               ],
               "page": 1,
@@ -106,7 +100,7 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/partners/waterfalls")
+                    .WithPath("/v2/loans/review-requests")
                     .UsingGet()
             )
             .RespondWith(
@@ -116,8 +110,8 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Partners.ListPartnerWaterfallsAsync(
-            new ListPartnerWaterfallsRequest()
+        var response = await Client.Loans.ListLoanReviewRequestsAsync(
+            new ListLoanReviewRequestsRequest()
         );
         JsonAssert.AreEqual(response, mockResponse);
     }

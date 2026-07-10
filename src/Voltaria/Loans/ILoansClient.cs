@@ -3,6 +3,33 @@ namespace Voltaria;
 public partial interface ILoansClient
 {
     /// <summary>
+    /// List loan review requests for your partner account, optionally filtered by loan ID or client ID.
+    /// </summary>
+    WithRawResponseTask<PaginatedResponseLoanReviewRequestResponse> ListLoanReviewRequestsAsync(
+        ListLoanReviewRequestsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Ask Voltaria to review a not-yet-disbursed (pending or pre-approved) loan before disbursement.
+    /// </summary>
+    WithRawResponseTask<LoanReviewRequestResponse> CreateLoanReviewRequestAsync(
+        LoanReviewRequestCreatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieve a specific loan review request by its ID.
+    /// </summary>
+    WithRawResponseTask<LoanReviewRequestResponse> GetLoanReviewRequestAsync(
+        GetLoanReviewRequestRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Retrieve all loans associated with your partner account. Supports optional filtering by client ID.
     /// </summary>
     WithRawResponseTask<PaginatedResponseLoanResponseWithClientInfo> ListLoansAsync(

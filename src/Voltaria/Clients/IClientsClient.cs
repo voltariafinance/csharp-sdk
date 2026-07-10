@@ -84,6 +84,15 @@ public partial interface IClientsClient
     );
 
     /// <summary>
+    /// Paginated list of portal users belonging to a client.
+    /// </summary>
+    WithRawResponseTask<PaginatedResponseClientUserResponse> ListClientPortalUsersAsync(
+        ListClientPortalUsersRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Invite a new user to a client's portal account. The invited user will receive an email with a one-time link to set their password. Partner can assign any role: 'owner', 'admin', or 'viewer'.
     /// </summary>
     WithRawResponseTask<ClientUserResponse> AddClientPortalUserAsync(

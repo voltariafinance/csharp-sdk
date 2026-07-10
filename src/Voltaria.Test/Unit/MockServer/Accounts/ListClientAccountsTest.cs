@@ -34,7 +34,8 @@ public class ListClientAccountsTest : BaseMockServerTest
                     "state": "state",
                     "line1": "line1"
                   },
-                  "status": "active"
+                  "status": "active",
+                  "created_at": "2024-01-15T09:30:00.000Z"
                 },
                 {
                   "id": "id",
@@ -55,7 +56,8 @@ public class ListClientAccountsTest : BaseMockServerTest
                     "state": "state",
                     "line1": "line1"
                   },
-                  "status": "active"
+                  "status": "active",
+                  "created_at": "2024-01-15T09:30:00.000Z"
                 }
               ],
               "page": 1,
@@ -112,7 +114,8 @@ public class ListClientAccountsTest : BaseMockServerTest
                     "postal_code": "10001",
                     "line1": "123 Main St"
                   },
-                  "status": "pending"
+                  "status": "pending",
+                  "created_at": "2024-01-15T10:30:00.000Z"
                 }
               ],
               "page": 1,

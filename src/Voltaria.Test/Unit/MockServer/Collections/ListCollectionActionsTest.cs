@@ -3,11 +3,11 @@ using Voltaria;
 using Voltaria.Test.Unit.MockServer;
 using Voltaria.Test.Utils;
 
-namespace Voltaria.Test.Unit.MockServer.Partners;
+namespace Voltaria.Test.Unit.MockServer.Collections;
 
 [TestFixture]
 [Parallelizable(ParallelScope.Self)]
-public class ListPartnerWaterfallsTest : BaseMockServerTest
+public class ListCollectionActionsTest : BaseMockServerTest
 {
     [NUnit.Framework.Test]
     public async Task MockServerTest_1()
@@ -17,29 +17,19 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
               "items": [
                 {
                   "id": "id",
-                  "partner_id": "partner_id",
                   "name": "name",
-                  "date": "2023-01-15",
-                  "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
-                  "created_at": "2024-01-15T09:30:00.000Z",
-                  "updated_at": "2024-01-15T09:30:00.000Z"
+                  "action_type": "email",
+                  "is_active": true,
+                  "description": "description",
+                  "timing": "timing"
                 },
                 {
                   "id": "id",
-                  "partner_id": "partner_id",
                   "name": "name",
-                  "date": "2023-01-15",
-                  "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
-                  "created_at": "2024-01-15T09:30:00.000Z",
-                  "updated_at": "2024-01-15T09:30:00.000Z"
+                  "action_type": "email",
+                  "is_active": true,
+                  "description": "description",
+                  "timing": "timing"
                 }
               ],
               "page": 1,
@@ -56,7 +46,7 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/partners/waterfalls")
+                    .WithPath("/v2/collection-actions")
                     .UsingGet()
             )
             .RespondWith(
@@ -66,8 +56,8 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Partners.ListPartnerWaterfallsAsync(
-            new ListPartnerWaterfallsRequest()
+        var response = await Client.Collections.ListCollectionActionsAsync(
+            new ListCollectionActionsRequest()
         );
         JsonAssert.AreEqual(response, mockResponse);
     }
@@ -79,17 +69,12 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             {
               "items": [
                 {
-                  "id": "id",
-                  "partner_id": "partner_id",
-                  "name": "name",
-                  "date": "2023-01-15",
-                  "status": "pending",
-                  "amount": "amount",
-                  "currency": "currency",
-                  "payment_date": "2023-01-15",
-                  "file_url": "file_url",
-                  "created_at": "2024-01-15T09:30:00.000Z",
-                  "updated_at": "2024-01-15T09:30:00.000Z"
+                  "id": "collection_action_123",
+                  "name": "Overdue reminder email",
+                  "action_type": "email",
+                  "is_active": true,
+                  "description": "description",
+                  "timing": "d-5"
                 }
               ],
               "page": 1,
@@ -106,7 +91,7 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/partners/waterfalls")
+                    .WithPath("/v2/collection-actions")
                     .UsingGet()
             )
             .RespondWith(
@@ -116,8 +101,8 @@ public class ListPartnerWaterfallsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Partners.ListPartnerWaterfallsAsync(
-            new ListPartnerWaterfallsRequest()
+        var response = await Client.Collections.ListCollectionActionsAsync(
+            new ListCollectionActionsRequest()
         );
         JsonAssert.AreEqual(response, mockResponse);
     }

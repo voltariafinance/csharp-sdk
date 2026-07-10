@@ -5,74 +5,62 @@ using Voltaria.Core;
 namespace Voltaria;
 
 [Serializable]
-public record WaterfallResponse : IJsonOnDeserialized
+public record LoanReviewRequestResponse : IJsonOnDeserialized
 {
     [JsonExtensionData]
     private readonly IDictionary<string, JsonElement> _extensionData =
         new Dictionary<string, JsonElement>();
 
     /// <summary>
-    /// The ID of the waterfall
+    /// The ID of the loan review request
     /// </summary>
     [JsonPropertyName("id")]
     public required string Id { get; set; }
 
     /// <summary>
-    /// The partner ID
+    /// The ID of the loan associated with the review request
     /// </summary>
-    [JsonPropertyName("partner_id")]
-    public required string PartnerId { get; set; }
+    [JsonPropertyName("loan_id")]
+    public required string LoanId { get; set; }
 
     /// <summary>
-    /// The name of the waterfall
+    /// The ID of the client associated with the review request
     /// </summary>
-    [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonPropertyName("client_id")]
+    public required string ClientId { get; set; }
 
     /// <summary>
-    /// The date of the waterfall
-    /// </summary>
-    [JsonPropertyName("date")]
-    public required DateOnly Date { get; set; }
-
-    /// <summary>
-    /// The status of the waterfall
+    /// The status of the review request. One of the following: pending, approved, rejected
     /// </summary>
     [JsonPropertyName("status")]
-    public required WaterfallStatusEnum Status { get; set; }
+    public required LoanReviewRequestStatusEnum Status { get; set; }
 
     /// <summary>
-    /// The payment amount recorded for the waterfall
+    /// The requester's note for the review request
     /// </summary>
-    [JsonPropertyName("amount")]
-    public string? Amount { get; set; }
+    [JsonPropertyName("notes")]
+    public string? Notes { get; set; }
 
     /// <summary>
-    /// The currency of the payment
+    /// The reviewer's note explaining the approval or rejection
     /// </summary>
-    [JsonPropertyName("currency")]
-    public string? Currency { get; set; }
+    [JsonPropertyName("response")]
+    public string? Response { get; set; }
 
     /// <summary>
-    /// The date the payment was made
+    /// The timestamp when the review request was approved or rejected
     /// </summary>
-    [JsonPropertyName("payment_date")]
-    public DateOnly? PaymentDate { get; set; }
+    [JsonPropertyName("reviewed_at")]
+    public DateTime? ReviewedAt { get; set; }
 
     /// <summary>
-    /// The Presigned URL of the file. This is a temporary URL that allows you to download the file.
-    /// </summary>
-    [JsonPropertyName("file_url")]
-    public string? FileUrl { get; set; }
-
-    /// <summary>
-    /// The date and time when the waterfall was created
+    /// The timestamp when the review request was created
     /// </summary>
     [JsonPropertyName("created_at")]
     public required DateTime CreatedAt { get; set; }
 
     /// <summary>
-    /// The date and time when the waterfall was last updated
+    /// The timestamp when the review request was last updated
     /// </summary>
     [JsonPropertyName("updated_at")]
     public required DateTime UpdatedAt { get; set; }

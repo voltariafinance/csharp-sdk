@@ -119,6 +119,18 @@ public record LoanResponseWithClientInfo : IJsonOnDeserialized
     [JsonPropertyName("client")]
     public required ClientBaseInfo Client { get; set; }
 
+    /// <summary>
+    /// Remaining principal for installments with status active or overdue, net of any repayments already made
+    /// </summary>
+    [JsonPropertyName("outstanding_principal")]
+    public string? OutstandingPrincipal { get; set; }
+
+    /// <summary>
+    /// Remaining amount (principal and interest) for installments with status active or overdue, net of any repayments already made
+    /// </summary>
+    [JsonPropertyName("remaining_amount")]
+    public string? RemainingAmount { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 
