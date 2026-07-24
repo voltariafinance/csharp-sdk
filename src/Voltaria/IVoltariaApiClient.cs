@@ -11,6 +11,7 @@ public partial interface IVoltariaApiClient
     public IInstallmentsClient Installments { get; }
     public ILoansClient Loans { get; }
     public IPartnersClient Partners { get; }
+    public IRecoveriesClient Recoveries { get; }
     public IWebhooksClient Webhooks { get; }
     public IRepaymentsClient Repayments { get; }
     public IDrawdownsClient Drawdowns { get; }

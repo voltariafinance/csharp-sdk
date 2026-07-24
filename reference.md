@@ -3222,6 +3222,123 @@ await client.Partners.ListPartnerWaterfallsAsync(new ListPartnerWaterfallsReques
 </dl>
 </details>
 
+## Recoveries
+<details><summary><code>client.Recoveries.<a href="/src/Voltaria/Recoveries/RecoveriesClient.cs">ListRecoveriesAsync</a>(ListRecoveriesRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseRecoveryResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve recoveries recorded against your loans. Supports filtering by client or loan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Recoveries.ListRecoveriesAsync(new ListRecoveriesRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListRecoveriesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Recoveries.<a href="/src/Voltaria/Recoveries/RecoveriesClient.cs">CreateRecoveryAsync</a>(RecoveryCreatePayload { ... }) -> WithRawResponseTask&lt;RecoveryResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Record a new recovery against one of your loans.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Recoveries.CreateRecoveryAsync(
+    new RecoveryCreatePayload
+    {
+        LoanId = "loan_abc123",
+        Amount = 1.1,
+        Currency = CurrencyEnum.Eur,
+        RecoveryDate = new DateOnly(2026, 7, 15),
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `RecoveryCreatePayload` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Webhooks
 <details><summary><code>client.Webhooks.<a href="/src/Voltaria/Webhooks/WebhooksClient.cs">ListWebhookSubscriptionsAsync</a>(ListWebhookSubscriptionsRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseWebhookSubscriptionResponse&gt;</code></summary>
 <dl>
