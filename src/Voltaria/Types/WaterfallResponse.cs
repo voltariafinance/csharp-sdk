@@ -51,7 +51,7 @@ public record WaterfallResponse : IJsonOnDeserialized
     /// The currency of the payment
     /// </summary>
     [JsonPropertyName("currency")]
-    public string? Currency { get; set; }
+    public CurrencyEnum? Currency { get; set; }
 
     /// <summary>
     /// The date the payment was made
