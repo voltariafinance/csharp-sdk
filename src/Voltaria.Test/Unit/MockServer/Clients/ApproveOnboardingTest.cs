@@ -90,13 +90,13 @@ public class ApproveOnboardingTest : BaseMockServerTest
               "limits": [
                 {
                   "currency": "eur",
-                  "max_maturity_days": 1,
-                  "limit": "limit",
-                  "rate": "rate",
-                  "outstanding": "outstanding",
-                  "available": "available",
-                  "created_at": "2024-01-15T09:30:00.000Z",
-                  "updated_at": "2024-01-15T09:30:00.000Z"
+                  "max_maturity_days": 90,
+                  "limit": "200000.00",
+                  "rate": "2.50",
+                  "outstanding": "100657.89",
+                  "available": "99342.11",
+                  "created_at": "2026-09-11T10:00:00.000Z",
+                  "updated_at": "2026-09-11T10:00:00.000Z"
                 }
               ],
               "data": {

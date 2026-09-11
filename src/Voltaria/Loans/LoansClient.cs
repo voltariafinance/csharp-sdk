@@ -629,6 +629,96 @@ public partial class LoansClient : ILoansClient
         }
     }
 
+    private async Task<WithRawResponse<EarlySettlementResponse>> CalculateSettlementAsyncCore(
+        EarlySettlementPayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Post,
+                    Path = string.Format(
+                        "v2/loans/{0}/calculate-settlement",
+                        ValueConvert.ToPathParameterString(request.LoanId)
+                    ),
+                    Body = request,
+                    Headers = _headers,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData = JsonUtils.Deserialize<EarlySettlementResponse>(responseBody)!;
+                return new WithRawResponse<EarlySettlementResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 400:
+                        throw new BadRequestError(JsonUtils.Deserialize<object>(responseBody));
+                    case 403:
+                        throw new ForbiddenError(JsonUtils.Deserialize<object>(responseBody));
+                    case 404:
+                        throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
     private async Task<WithRawResponse<BulkLoanTaskResponse>> CreateBulkLoansAsyncCore(
         BulkLoanCreatePayload request,
         RequestOptions? options = null,
@@ -1021,6 +1111,23 @@ public partial class LoansClient : ILoansClient
     {
         return new WithRawResponseTask<Dictionary<string, object?>?>(
             DeleteLoanAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
+    /// Calculate the indicative early settlement figure for a loan as of the given settlement date. The amount is indicative only, not a binding quote, and has no validity period — it changes as repayments are recorded and as the settlement date moves. Confirm the final amount with Voltaria before collecting from the borrower.
+    /// </summary>
+    /// <example><code>
+    /// await client.Loans.CalculateSettlementAsync(new EarlySettlementPayload { LoanId = "loan_id" });
+    /// </code></example>
+    public WithRawResponseTask<EarlySettlementResponse> CalculateSettlementAsync(
+        EarlySettlementPayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<EarlySettlementResponse>(
+            CalculateSettlementAsyncCore(request, options, cancellationToken)
         );
     }
 
