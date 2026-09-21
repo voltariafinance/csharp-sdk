@@ -90,6 +90,12 @@ public record ClientAccountResponse : IJsonOnDeserialized
     public required AccountStatusEnum Status { get; set; }
 
     /// <summary>
+    /// Confirmation of Payee result for this account. `null` when the account has never been checked, or when the check does not apply to it. One of: `matched`, `close_match`, `not_matched`, `account_not_found`, `unavailable`.
+    /// </summary>
+    [JsonPropertyName("cop_status")]
+    public CopStatusEnum? CopStatus { get; set; }
+
+    /// <summary>
     /// Timestamp when the account was created.
     /// </summary>
     [JsonPropertyName("created_at")]

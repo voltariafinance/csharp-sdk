@@ -41,6 +41,7 @@ public class CreateClientAccountTest : BaseMockServerTest
                 "line1": "line1"
               },
               "status": "active",
+              "cop_status": "matched",
               "created_at": "2024-01-15T09:30:00.000Z"
             }
             """;
@@ -116,6 +117,7 @@ public class CreateClientAccountTest : BaseMockServerTest
                 "line1": "123 Main St"
               },
               "status": "pending",
+              "cop_status": "matched",
               "created_at": "2024-01-15T10:30:00.000Z"
             }
             """;

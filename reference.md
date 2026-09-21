@@ -3996,6 +3996,401 @@ await client.Repayments.GetBulkRepaymentStatusAsync(
 </dl>
 </details>
 
+## Tasks
+<details><summary><code>client.Tasks.<a href="/src/Voltaria/Tasks/TasksClient.cs">ListTasksAsync</a>(ListTasksRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseTaskPartnerResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Paginated list of the tasks shared with your partner account, optionally filtered by status or by the client, loan, installment or waterfall they relate to.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Tasks.ListTasksAsync(new ListTasksRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListTasksRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Tasks.<a href="/src/Voltaria/Tasks/TasksClient.cs">CreateTaskAsync</a>(TaskPartnerCreatePayload { ... }) -> WithRawResponseTask&lt;TaskPartnerResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Open a task for your partner account. Any entity you link to it must belong to you.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Tasks.CreateTaskAsync(
+    new TaskPartnerCreatePayload { Title = "Send updated bank statement" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TaskPartnerCreatePayload` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Tasks.<a href="/src/Voltaria/Tasks/TasksClient.cs">GetTaskAsync</a>(GetTaskRequest { ... }) -> WithRawResponseTask&lt;TaskPartnerResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve one of your tasks by its ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Tasks.GetTaskAsync(new GetTaskRequest { TaskId = "task_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetTaskRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Tasks.<a href="/src/Voltaria/Tasks/TasksClient.cs">UpdateTaskStatusAsync</a>(TaskPartnerStatusUpdatePayload { ... }) -> WithRawResponseTask&lt;TaskPartnerResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Move one of your tasks to another status. Status is the only field you can change. Requires a signed-in user — API keys cannot change a task.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Tasks.UpdateTaskStatusAsync(
+    new TaskPartnerStatusUpdatePayload
+    {
+        TaskId = "task_id",
+        Status = TaskPartnerStatusUpdatePayloadStatus.Active,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TaskPartnerStatusUpdatePayload` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Tasks.<a href="/src/Voltaria/Tasks/TasksClient.cs">ListTaskStatusHistoryAsync</a>(ListTaskStatusHistoryRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseTaskPartnerStatusHistoryResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The status transitions of one of your tasks, and whether each one was made by your team or by Voltaria support.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Tasks.ListTaskStatusHistoryAsync(
+    new ListTaskStatusHistoryRequest { TaskId = "task_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListTaskStatusHistoryRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Tasks.<a href="/src/Voltaria/Tasks/TasksClient.cs">ListTaskNotesAsync</a>(ListTaskNotesRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseNoteResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Notes exchanged with Voltaria on one of your tasks.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Tasks.ListTaskNotesAsync(new ListTaskNotesRequest { TaskId = "task_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListTaskNotesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Tasks.<a href="/src/Voltaria/Tasks/TasksClient.cs">CreateTaskNoteAsync</a>(TaskNoteCreatePayload { ... }) -> WithRawResponseTask&lt;NoteResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a note to one of your tasks. Requires a signed-in user — API keys cannot write notes, because a note needs an author.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Tasks.CreateTaskNoteAsync(
+    new TaskNoteCreatePayload
+    {
+        TaskId = "task_id",
+        Content = "Statement uploaded, please re-check.",
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TaskNoteCreatePayload` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Drawdowns
 <details><summary><code>client.Drawdowns.<a href="/src/Voltaria/Drawdowns/DrawdownsClient.cs">ListDrawdownsAsync</a>(ListDrawdownsRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseDrawdownResponse&gt;</code></summary>
 <dl>

@@ -45,6 +45,7 @@ public partial class VoltariaApiClient : IVoltariaApiClient
         Recoveries = new RecoveriesClient(_client);
         Webhooks = new WebhooksClient(_client);
         Repayments = new RepaymentsClient(_client);
+        Tasks = new TasksClient(_client);
         Drawdowns = new DrawdownsClient(_client);
     }
 
@@ -71,6 +72,8 @@ public partial class VoltariaApiClient : IVoltariaApiClient
     public IWebhooksClient Webhooks { get; }
 
     public IRepaymentsClient Repayments { get; }
+
+    public ITasksClient Tasks { get; }
 
     public IDrawdownsClient Drawdowns { get; }
 }
