@@ -14,6 +14,8 @@ public readonly record struct TaskStatusEnum : IStringEnum
 
     public static readonly TaskStatusEnum Blocked = new(Values.Blocked);
 
+    public static readonly TaskStatusEnum ReviewNeeded = new(Values.ReviewNeeded);
+
     public static readonly TaskStatusEnum Done = new(Values.Done);
 
     public static readonly TaskStatusEnum Cancelled = new(Values.Cancelled);
@@ -119,6 +121,8 @@ public readonly record struct TaskStatusEnum : IStringEnum
         public const string InProgress = "in_progress";
 
         public const string Blocked = "blocked";
+
+        public const string ReviewNeeded = "review_needed";
 
         public const string Done = "done";
 

@@ -33,7 +33,7 @@ public record TaskPartnerResponse : IJsonOnDeserialized
     public string? Description { get; set; }
 
     /// <summary>
-    /// The status of the task. One of the following: active, in_progress, blocked, done, cancelled
+    /// The status of the task. One of the following: active, in_progress, blocked, review_needed, done, cancelled
     /// </summary>
     [JsonPropertyName("status")]
     public required TaskStatusEnum Status { get; set; }

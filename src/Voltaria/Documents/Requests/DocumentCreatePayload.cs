@@ -19,6 +19,12 @@ public record DocumentCreatePayload
     public string? WaterfallId { get; set; }
 
     /// <summary>
+    /// The task this document answers, if any.
+    /// </summary>
+    [JsonIgnore]
+    public string? TaskId { get; set; }
+
+    /// <summary>
     /// The category of the document. Available options can be fetched from the available categories endpoint. '.../documents/available-categories'.
     /// </summary>
     public required string Category { get; set; }
