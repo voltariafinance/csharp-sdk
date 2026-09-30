@@ -1043,6 +1043,103 @@ public partial class ClientsClient : IClientsClient
         }
     }
 
+    private async Task<
+        WithRawResponse<PaginatedResponseClientLimitHistoryResponse>
+    > ListClientLimitsAsyncCore(
+        ListClientLimitsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _queryString = new Voltaria.Core.QueryStringBuilder.Builder(capacity: 4)
+            .Add("page", request.Page)
+            .Add("page_size", request.PageSize)
+            .Add("order_by", request.OrderBy)
+            .Add("q", request.Q)
+            .MergeAdditional(options?.AdditionalQueryParameters)
+            .Build();
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Get,
+                    Path = string.Format(
+                        "v2/clients/{0}/limits",
+                        ValueConvert.ToPathParameterString(request.ClientId)
+                    ),
+                    QueryString = _queryString,
+                    Headers = _headers,
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData =
+                    JsonUtils.Deserialize<PaginatedResponseClientLimitHistoryResponse>(
+                        responseBody
+                    )!;
+                return new WithRawResponse<PaginatedResponseClientLimitHistoryResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 404:
+                        throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
     private async Task<WithRawResponse<ClientResponse>> GetClientByIdAsyncCore(
         GetClientByIdRequest request,
         RequestOptions? options = null,
@@ -1541,6 +1638,23 @@ public partial class ClientsClient : IClientsClient
     {
         return new WithRawResponseTask<PaginatedResponseWaiverResponse>(
             ListClientWaiversAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
+    /// Retrieve every credit limit granted to a specific client.
+    /// </summary>
+    /// <example><code>
+    /// await client.Clients.ListClientLimitsAsync(new ListClientLimitsRequest { ClientId = "client_id" });
+    /// </code></example>
+    public WithRawResponseTask<PaginatedResponseClientLimitHistoryResponse> ListClientLimitsAsync(
+        ListClientLimitsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<PaginatedResponseClientLimitHistoryResponse>(
+            ListClientLimitsAsyncCore(request, options, cancellationToken)
         );
     }
 

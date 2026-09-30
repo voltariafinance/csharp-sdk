@@ -111,6 +111,15 @@ public partial interface IClientsClient
     );
 
     /// <summary>
+    /// Retrieve every credit limit granted to a specific client.
+    /// </summary>
+    WithRawResponseTask<PaginatedResponseClientLimitHistoryResponse> ListClientLimitsAsync(
+        ListClientLimitsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Retrieve detailed information for a specific client using their client ID.
     /// </summary>
     WithRawResponseTask<ClientResponse> GetClientByIdAsync(

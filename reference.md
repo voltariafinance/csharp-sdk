@@ -678,6 +678,60 @@ await client.Clients.ListClientWaiversAsync(
 </dl>
 </details>
 
+<details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">ListClientLimitsAsync</a>(ListClientLimitsRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseClientLimitHistoryResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve every credit limit granted to a specific client.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Clients.ListClientLimitsAsync(new ListClientLimitsRequest { ClientId = "client_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListClientLimitsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">GetClientByIdAsync</a>(GetClientByIdRequest { ... }) -> WithRawResponseTask&lt;ClientResponse&gt;</code></summary>
 <dl>
 <dd>
