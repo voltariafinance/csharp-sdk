@@ -37,6 +37,7 @@ public class SetLoanDefaultTest : BaseMockServerTest
               "payment_reference": "payment_reference",
               "early_settlement_date": "2023-01-15",
               "early_settlement_amount": "early_settlement_amount",
+              "repayment_method": "pmt",
               "data": {
                 "data": {
                   "key": "value"
@@ -120,6 +121,7 @@ public class SetLoanDefaultTest : BaseMockServerTest
               "payment_reference": "payment_reference",
               "early_settlement_date": "2023-01-15",
               "early_settlement_amount": "early_settlement_amount",
+              "repayment_method": "pmt",
               "data": {
                 "key": "value"
               },

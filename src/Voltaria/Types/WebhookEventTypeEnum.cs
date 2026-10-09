@@ -20,6 +20,10 @@ public readonly record struct WebhookEventTypeEnum : IStringEnum
         Values.PartnerLimitUpdated
     );
 
+    public static readonly WebhookEventTypeEnum BankConnectionUpdated = new(
+        Values.BankConnectionUpdated
+    );
+
     public WebhookEventTypeEnum(string value)
     {
         Value = value;
@@ -125,5 +129,7 @@ public readonly record struct WebhookEventTypeEnum : IStringEnum
         public const string ClientLimitUpdated = "client.limit.updated";
 
         public const string PartnerLimitUpdated = "partner.limit.updated";
+
+        public const string BankConnectionUpdated = "bank_connection.updated";
     }
 }

@@ -30,7 +30,7 @@ public record WebhookSubscriptionResponse : IJsonOnDeserialized
     public string? Description { get; set; }
 
     /// <summary>
-    /// Event type subscribed toPossible values: loan_updated, installment_updated, client_updated, client_limit_updated, partner_limit_updated
+    /// Event type subscribed toPossible values: loan_updated, installment_updated, client_updated, client_limit_updated, partner_limit_updated, bank_connection_updated
     /// </summary>
     [JsonPropertyName("event_type")]
     public required WebhookEventTypeEnum EventType { get; set; }

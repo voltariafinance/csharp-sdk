@@ -98,6 +98,7 @@ public class CreateBulkLoansTest : BaseMockServerTest
                                 Amount = 1.1,
                             },
                         },
+                        RepaymentMethod = null,
                         Data = null,
                     },
                     new BulkLoanItemPayload
@@ -120,6 +121,7 @@ public class CreateBulkLoansTest : BaseMockServerTest
                                 Amount = 1.1,
                             },
                         },
+                        RepaymentMethod = null,
                         Data = null,
                     },
                 },

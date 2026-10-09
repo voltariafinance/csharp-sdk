@@ -10,7 +10,7 @@ public record LoanUpdateSandbox
     public required string LoanId { get; set; }
 
     /// <summary>
-    /// The status of the client. One of the following: `pending, overdue, active, default, sold, restructured, repaid, pre_approved, rejected, deleted, inactive`
+    /// The status of the loan. One of the following: `pending, overdue, active, default, sold, restructured, repaid, pre_approved, rejected, inactive`. Use the delete loan endpoint to delete a loan.
     /// </summary>
     [JsonPropertyName("status")]
     public LoanStatusEnum? Status { get; set; }

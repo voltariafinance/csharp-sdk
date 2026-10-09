@@ -108,6 +108,12 @@ public record LoanInvestorResponse : IJsonOnDeserialized
     public string? EarlySettlementAmount { get; set; }
 
     /// <summary>
+    /// How each installment is split into principal and interest
+    /// </summary>
+    [JsonPropertyName("repayment_method")]
+    public required LoanRepaymentMethodEnum RepaymentMethod { get; set; }
+
+    /// <summary>
     /// Additional data related to the loan
     /// </summary>
     [JsonPropertyName("data")]

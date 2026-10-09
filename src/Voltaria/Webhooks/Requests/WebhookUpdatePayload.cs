@@ -22,7 +22,7 @@ public record WebhookUpdatePayload
     public string? Description { get; set; }
 
     /// <summary>
-    /// Event type to subscribe toPossible values: loan_updated, installment_updated, client_updated, client_limit_updated, partner_limit_updated
+    /// Event type to subscribe toPossible values: loan_updated, installment_updated, client_updated, client_limit_updated, partner_limit_updated, bank_connection_updated
     /// </summary>
     [JsonPropertyName("event_type")]
     public WebhookEventTypeEnum? EventType { get; set; }

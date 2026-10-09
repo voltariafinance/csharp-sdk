@@ -50,6 +50,12 @@ public record BulkLoanItemPayload : IJsonOnDeserialized
         new List<LoanInstallmentCreatePayload>();
 
     /// <summary>
+    /// How each installment is split into principal and interest: pmt (amortising) or constant_principal (loan amount divided equally across installments, the rest is interest)
+    /// </summary>
+    [JsonPropertyName("repayment_method")]
+    public LoanRepaymentMethodEnum? RepaymentMethod { get; set; }
+
+    /// <summary>
     /// Additional data related to the loan
     /// </summary>
     [JsonPropertyName("data")]

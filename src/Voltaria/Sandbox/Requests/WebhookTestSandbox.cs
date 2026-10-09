@@ -13,7 +13,7 @@ public record WebhookTestSandbox
     public string? WebhookId { get; set; }
 
     /// <summary>
-    /// Event type to trigger for the test. All subscriptions for this event type will be triggered if webhook_id is not provided.Possible values: loan_updated, installment_updated, client_updated, client_limit_updated, partner_limit_updated
+    /// Event type to trigger for the test. All subscriptions for this event type will be triggered if webhook_id is not provided.Possible values: loan_updated, installment_updated, client_updated, client_limit_updated, partner_limit_updated, bank_connection_updated
     /// </summary>
     [JsonPropertyName("event_type")]
     public required WebhookEventTypeEnum EventType { get; set; }
