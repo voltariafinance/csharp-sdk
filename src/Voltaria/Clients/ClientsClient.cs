@@ -1140,6 +1140,280 @@ public partial class ClientsClient : IClientsClient
         }
     }
 
+    private async Task<
+        WithRawResponse<PaginatedResponseClientCounterpartyResponse>
+    > ListClientCounterpartiesAsyncCore(
+        ListClientCounterpartiesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _queryString = new Voltaria.Core.QueryStringBuilder.Builder(capacity: 4)
+            .Add("page", request.Page)
+            .Add("page_size", request.PageSize)
+            .Add("order_by", request.OrderBy)
+            .Add("q", request.Q)
+            .MergeAdditional(options?.AdditionalQueryParameters)
+            .Build();
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Get,
+                    Path = string.Format(
+                        "v2/clients/{0}/counterparties",
+                        ValueConvert.ToPathParameterString(request.ClientId)
+                    ),
+                    QueryString = _queryString,
+                    Headers = _headers,
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData =
+                    JsonUtils.Deserialize<PaginatedResponseClientCounterpartyResponse>(
+                        responseBody
+                    )!;
+                return new WithRawResponse<PaginatedResponseClientCounterpartyResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 404:
+                        throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    private async Task<
+        WithRawResponse<ClientCounterpartyResponse>
+    > CreateClientCounterpartyAsyncCore(
+        ClientCounterpartyCreatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Post,
+                    Path = string.Format(
+                        "v2/clients/{0}/counterparties",
+                        ValueConvert.ToPathParameterString(request.ClientId)
+                    ),
+                    Body = request,
+                    Headers = _headers,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData = JsonUtils.Deserialize<ClientCounterpartyResponse>(responseBody)!;
+                return new WithRawResponse<ClientCounterpartyResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 404:
+                        throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    private async Task<
+        WithRawResponse<ClientCounterpartyResponse>
+    > UpdateClientCounterpartyAsyncCore(
+        ClientCounterpartyUpdatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethodExtensions.Patch,
+                    Path = string.Format(
+                        "v2/clients/{0}/counterparties/{1}",
+                        ValueConvert.ToPathParameterString(request.ClientId),
+                        ValueConvert.ToPathParameterString(request.CounterpartyId)
+                    ),
+                    Body = request,
+                    Headers = _headers,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData = JsonUtils.Deserialize<ClientCounterpartyResponse>(responseBody)!;
+                return new WithRawResponse<ClientCounterpartyResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 404:
+                        throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
     private async Task<WithRawResponse<ClientResponse>> GetClientByIdAsyncCore(
         GetClientByIdRequest request,
         RequestOptions? options = null,
@@ -1389,6 +1663,98 @@ public partial class ClientsClient : IClientsClient
                 {
                     case 404:
                         throw new NotFoundError(JsonUtils.Deserialize<object>(responseBody));
+                    case 422:
+                        throw new UnprocessableEntityError(
+                            JsonUtils.Deserialize<object>(responseBody)
+                        );
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
+            throw new VoltariaApiApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    private async Task<
+        WithRawResponse<PaginatedResponseClientCounterpartyWithClientResponse>
+    > ListAllClientCounterpartiesAsyncCore(
+        ListAllClientCounterpartiesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _queryString = new Voltaria.Core.QueryStringBuilder.Builder(capacity: 4)
+            .Add("page", request.Page)
+            .Add("page_size", request.PageSize)
+            .Add("order_by", request.OrderBy)
+            .Add("q", request.Q)
+            .MergeAdditional(options?.AdditionalQueryParameters)
+            .Build();
+        var _headers = await new Voltaria.Core.HeadersBuilder.Builder()
+            .Add(_client.Options.Headers)
+            .Add(_client.Options.AdditionalHeaders)
+            .Add(options?.AdditionalHeaders)
+            .BuildAsync()
+            .ConfigureAwait(false);
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    Method = HttpMethod.Get,
+                    Path = "v2/client-counterparties",
+                    QueryString = _queryString,
+                    Headers = _headers,
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                var responseData =
+                    JsonUtils.Deserialize<PaginatedResponseClientCounterpartyWithClientResponse>(
+                        responseBody
+                    )!;
+                return new WithRawResponse<PaginatedResponseClientCounterpartyWithClientResponse>()
+                {
+                    Data = responseData,
+                    RawResponse = new RawResponse()
+                    {
+                        StatusCode = response.Raw.StatusCode,
+                        Url = response.Raw.RequestMessage?.RequestUri ?? new Uri("about:blank"),
+                        Headers = ResponseHeaders.FromHttpResponseMessage(response.Raw),
+                    },
+                };
+            }
+            catch (JsonException e)
+            {
+                throw new VoltariaApiApiException(
+                    "Failed to deserialize response",
+                    response.StatusCode,
+                    responseBody,
+                    e
+                );
+            }
+        }
+        {
+            var responseBody = await response
+                .Raw.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+            try
+            {
+                switch (response.StatusCode)
+                {
                     case 422:
                         throw new UnprocessableEntityError(
                             JsonUtils.Deserialize<object>(responseBody)
@@ -1659,6 +2025,67 @@ public partial class ClientsClient : IClientsClient
     }
 
     /// <summary>
+    /// Retrieve the counterparties of a specific client, e.g. its debtors or installers.
+    /// </summary>
+    /// <example><code>
+    /// await client.Clients.ListClientCounterpartiesAsync(
+    ///     new ListClientCounterpartiesRequest { ClientId = "client_id" }
+    /// );
+    /// </code></example>
+    public WithRawResponseTask<PaginatedResponseClientCounterpartyResponse> ListClientCounterpartiesAsync(
+        ListClientCounterpartiesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<PaginatedResponseClientCounterpartyResponse>(
+            ListClientCounterpartiesAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
+    /// Add a counterparty to a specific client. It starts with your default counterparty status.
+    /// </summary>
+    /// <example><code>
+    /// await client.Clients.CreateClientCounterpartyAsync(
+    ///     new ClientCounterpartyCreatePayload { ClientId = "client_id", Name = "Acme Installations Ltd" }
+    /// );
+    /// </code></example>
+    public WithRawResponseTask<ClientCounterpartyResponse> CreateClientCounterpartyAsync(
+        ClientCounterpartyCreatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<ClientCounterpartyResponse>(
+            CreateClientCounterpartyAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
+    /// Update the details of a counterparty of a specific client.
+    /// </summary>
+    /// <example><code>
+    /// await client.Clients.UpdateClientCounterpartyAsync(
+    ///     new ClientCounterpartyUpdatePayload
+    ///     {
+    ///         ClientId = "client_id",
+    ///         CounterpartyId = "counterparty_id",
+    ///     }
+    /// );
+    /// </code></example>
+    public WithRawResponseTask<ClientCounterpartyResponse> UpdateClientCounterpartyAsync(
+        ClientCounterpartyUpdatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<ClientCounterpartyResponse>(
+            UpdateClientCounterpartyAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
     /// Retrieve detailed information for a specific client using their client ID.
     /// </summary>
     /// <example><code>
@@ -1708,6 +2135,23 @@ public partial class ClientsClient : IClientsClient
     {
         return new WithRawResponseTask<PaginatedResponseChecklistSummaryPartnerResponse>(
             ListClientChecklistSummariesAsyncCore(request, options, cancellationToken)
+        );
+    }
+
+    /// <summary>
+    /// Retrieve the counterparties of all your clients, e.g. their debtors or installers, with each client's name.
+    /// </summary>
+    /// <example><code>
+    /// await client.Clients.ListAllClientCounterpartiesAsync(new ListAllClientCounterpartiesRequest());
+    /// </code></example>
+    public WithRawResponseTask<PaginatedResponseClientCounterpartyWithClientResponse> ListAllClientCounterpartiesAsync(
+        ListAllClientCounterpartiesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return new WithRawResponseTask<PaginatedResponseClientCounterpartyWithClientResponse>(
+            ListAllClientCounterpartiesAsyncCore(request, options, cancellationToken)
         );
     }
 }

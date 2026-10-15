@@ -61,7 +61,7 @@ public class CalculateSettlementTest : BaseMockServerTest
               "loan_id": "loan_12345",
               "settlement_date": "2026-09-07",
               "settlement_amount": "49000.00",
-              "settlement_irr": "0.05",
+              "settlement_irr": "settlement_irr",
               "original_irr": "original_irr",
               "minimum_fee": "minimum_fee"
             }

@@ -732,6 +732,178 @@ await client.Clients.ListClientLimitsAsync(new ListClientLimitsRequest { ClientI
 </dl>
 </details>
 
+<details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">ListClientCounterpartiesAsync</a>(ListClientCounterpartiesRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseClientCounterpartyResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the counterparties of a specific client, e.g. its debtors or installers.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Clients.ListClientCounterpartiesAsync(
+    new ListClientCounterpartiesRequest { ClientId = "client_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListClientCounterpartiesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">CreateClientCounterpartyAsync</a>(ClientCounterpartyCreatePayload { ... }) -> WithRawResponseTask&lt;ClientCounterpartyResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a counterparty to a specific client. It starts with your default counterparty status.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Clients.CreateClientCounterpartyAsync(
+    new ClientCounterpartyCreatePayload { ClientId = "client_id", Name = "Acme Installations Ltd" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ClientCounterpartyCreatePayload` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">UpdateClientCounterpartyAsync</a>(ClientCounterpartyUpdatePayload { ... }) -> WithRawResponseTask&lt;ClientCounterpartyResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the details of a counterparty of a specific client.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Clients.UpdateClientCounterpartyAsync(
+    new ClientCounterpartyUpdatePayload
+    {
+        ClientId = "client_id",
+        CounterpartyId = "counterparty_id",
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ClientCounterpartyUpdatePayload` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">GetClientByIdAsync</a>(GetClientByIdRequest { ... }) -> WithRawResponseTask&lt;ClientResponse&gt;</code></summary>
 <dl>
 <dd>
@@ -885,6 +1057,60 @@ await client.Clients.ListClientChecklistSummariesAsync(
 <dd>
 
 **request:** `ListClientChecklistSummariesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Clients.<a href="/src/Voltaria/Clients/ClientsClient.cs">ListAllClientCounterpartiesAsync</a>(ListAllClientCounterpartiesRequest { ... }) -> WithRawResponseTask&lt;PaginatedResponseClientCounterpartyWithClientResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the counterparties of all your clients, e.g. their debtors or installers, with each client's name.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Clients.ListAllClientCounterpartiesAsync(new ListAllClientCounterpartiesRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListAllClientCounterpartiesRequest` 
     
 </dd>
 </dl>

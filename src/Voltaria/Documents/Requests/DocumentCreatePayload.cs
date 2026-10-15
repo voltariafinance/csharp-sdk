@@ -9,6 +9,12 @@ public record DocumentCreatePayload
     [JsonIgnore]
     public string? ClientId { get; set; }
 
+    /// <summary>
+    /// The ID of the client counterparty this document belongs to, if any. Requires `client_id`; the counterparty must belong to that client.
+    /// </summary>
+    [JsonIgnore]
+    public string? ClientCounterpartyId { get; set; }
+
     [JsonIgnore]
     public string? LoanId { get; set; }
 

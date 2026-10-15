@@ -113,8 +113,9 @@ public partial class DocumentsClient : IDocumentsClient
         CancellationToken cancellationToken = default
     )
     {
-        var _queryString = new Voltaria.Core.QueryStringBuilder.Builder(capacity: 5)
+        var _queryString = new Voltaria.Core.QueryStringBuilder.Builder(capacity: 6)
             .Add("client_id", request.ClientId)
+            .Add("client_counterparty_id", request.ClientCounterpartyId)
             .Add("loan_id", request.LoanId)
             .Add("installment_id", request.InstallmentId)
             .Add("waterfall_id", request.WaterfallId)

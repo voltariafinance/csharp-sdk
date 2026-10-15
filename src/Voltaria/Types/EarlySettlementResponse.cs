@@ -30,10 +30,10 @@ public record EarlySettlementResponse : IJsonOnDeserialized
     public required string SettlementAmount { get; set; }
 
     /// <summary>
-    /// The internal rate of return at early settlement
+    /// The internal rate of return at early settlement; null when it is more than 3 times the loan's IRR, e.g. a minimum fee paid within days
     /// </summary>
     [JsonPropertyName("settlement_irr")]
-    public required string SettlementIrr { get; set; }
+    public string? SettlementIrr { get; set; }
 
     /// <summary>
     /// The original internal rate of return before early settlement

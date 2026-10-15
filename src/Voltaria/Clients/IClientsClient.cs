@@ -120,6 +120,33 @@ public partial interface IClientsClient
     );
 
     /// <summary>
+    /// Retrieve the counterparties of a specific client, e.g. its debtors or installers.
+    /// </summary>
+    WithRawResponseTask<PaginatedResponseClientCounterpartyResponse> ListClientCounterpartiesAsync(
+        ListClientCounterpartiesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Add a counterparty to a specific client. It starts with your default counterparty status.
+    /// </summary>
+    WithRawResponseTask<ClientCounterpartyResponse> CreateClientCounterpartyAsync(
+        ClientCounterpartyCreatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Update the details of a counterparty of a specific client.
+    /// </summary>
+    WithRawResponseTask<ClientCounterpartyResponse> UpdateClientCounterpartyAsync(
+        ClientCounterpartyUpdatePayload request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Retrieve detailed information for a specific client using their client ID.
     /// </summary>
     WithRawResponseTask<ClientResponse> GetClientByIdAsync(
@@ -142,6 +169,15 @@ public partial interface IClientsClient
     /// </summary>
     WithRawResponseTask<PaginatedResponseChecklistSummaryPartnerResponse> ListClientChecklistSummariesAsync(
         ListClientChecklistSummariesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieve the counterparties of all your clients, e.g. their debtors or installers, with each client's name.
+    /// </summary>
+    WithRawResponseTask<PaginatedResponseClientCounterpartyWithClientResponse> ListAllClientCounterpartiesAsync(
+        ListAllClientCounterpartiesRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );

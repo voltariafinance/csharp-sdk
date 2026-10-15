@@ -42,6 +42,12 @@ public record DocumentResponse : IJsonOnDeserialized
     public string? ClientId { get; set; }
 
     /// <summary>
+    /// The ID of the client counterparty the document belongs to, if applicable
+    /// </summary>
+    [JsonPropertyName("client_counterparty_id")]
+    public string? ClientCounterpartyId { get; set; }
+
+    /// <summary>
     /// The Presigned URL of the file. This is a temporary URL that allows you to download the file.
     /// </summary>
     [JsonPropertyName("file_url")]
