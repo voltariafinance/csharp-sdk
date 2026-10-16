@@ -51,6 +51,12 @@ public record LoanCreatePayload
     public LoanRepaymentMethodEnum? RepaymentMethod { get; set; }
 
     /// <summary>
+    /// The ID of the client counterparty this loan relates to. It must belong to the loan's client.
+    /// </summary>
+    [JsonPropertyName("client_counterparty_id")]
+    public string? ClientCounterpartyId { get; set; }
+
+    /// <summary>
     /// Additional data related to the loan
     /// </summary>
     [JsonPropertyName("data")]

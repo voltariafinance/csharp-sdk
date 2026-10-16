@@ -35,6 +35,7 @@ public class UpdateLoanTest : BaseMockServerTest
               "early_settlement_date": "2023-01-15",
               "early_settlement_amount": "early_settlement_amount",
               "repayment_method": "pmt",
+              "client_counterparty_id": "client_counterparty_id",
               "data": {
                 "data": {
                   "key": "value"
@@ -111,6 +112,7 @@ public class UpdateLoanTest : BaseMockServerTest
               "early_settlement_date": "2023-01-15",
               "early_settlement_amount": "early_settlement_amount",
               "repayment_method": "pmt",
+              "client_counterparty_id": "client_counterparty_id",
               "data": {
                 "key": "value"
               },

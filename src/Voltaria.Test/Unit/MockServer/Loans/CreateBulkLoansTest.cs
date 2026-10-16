@@ -99,6 +99,7 @@ public class CreateBulkLoansTest : BaseMockServerTest
                             },
                         },
                         RepaymentMethod = null,
+                        ClientCounterpartyId = null,
                         Data = null,
                     },
                     new BulkLoanItemPayload
@@ -122,6 +123,7 @@ public class CreateBulkLoansTest : BaseMockServerTest
                             },
                         },
                         RepaymentMethod = null,
+                        ClientCounterpartyId = null,
                         Data = null,
                     },
                 },

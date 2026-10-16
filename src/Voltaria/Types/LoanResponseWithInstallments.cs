@@ -114,6 +114,12 @@ public record LoanResponseWithInstallments : IJsonOnDeserialized
     public required LoanRepaymentMethodEnum RepaymentMethod { get; set; }
 
     /// <summary>
+    /// The ID of the client counterparty the loan relates to, if applicable
+    /// </summary>
+    [JsonPropertyName("client_counterparty_id")]
+    public string? ClientCounterpartyId { get; set; }
+
+    /// <summary>
     /// Additional data related to the loan
     /// </summary>
     [JsonPropertyName("data")]
