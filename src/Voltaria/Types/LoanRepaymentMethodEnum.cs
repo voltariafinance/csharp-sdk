@@ -14,6 +14,8 @@ public readonly record struct LoanRepaymentMethodEnum : IStringEnum
         Values.ConstantPrincipal
     );
 
+    public static readonly LoanRepaymentMethodEnum Custom = new(Values.Custom);
+
     public LoanRepaymentMethodEnum(string value)
     {
         Value = value;
@@ -113,5 +115,7 @@ public readonly record struct LoanRepaymentMethodEnum : IStringEnum
         public const string Pmt = "pmt";
 
         public const string ConstantPrincipal = "constant_principal";
+
+        public const string Custom = "custom";
     }
 }

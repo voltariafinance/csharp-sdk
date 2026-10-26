@@ -24,6 +24,18 @@ public record LoanInstallmentCreatePayload : IJsonOnDeserialized
     [JsonPropertyName("amount")]
     public required OneOf<double, string> Amount { get; set; }
 
+    /// <summary>
+    /// The principal part of the installment amount. Only when creating a loan with repayment_method custom, together with interest
+    /// </summary>
+    [JsonPropertyName("principal")]
+    public OneOf<double, string>? Principal { get; set; }
+
+    /// <summary>
+    /// The interest part of the installment amount. Only when creating a loan with repayment_method custom, together with principal
+    /// </summary>
+    [JsonPropertyName("interest")]
+    public OneOf<double, string>? Interest { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

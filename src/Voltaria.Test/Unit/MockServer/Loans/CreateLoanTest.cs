@@ -108,11 +108,15 @@ public class CreateLoanTest : BaseMockServerTest
                     {
                         ExpectedRepaymentAt = new DateOnly(2023, 1, 15),
                         Amount = 1.1,
+                        Principal = null,
+                        Interest = null,
                     },
                     new LoanInstallmentCreatePayload
                     {
                         ExpectedRepaymentAt = new DateOnly(2023, 1, 15),
                         Amount = 1.1,
+                        Principal = null,
+                        Interest = null,
                     },
                 },
                 RepaymentMethod = null,
