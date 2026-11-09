@@ -42,6 +42,7 @@ public class CreateClientAccountTest : BaseMockServerTest
               },
               "status": "active",
               "cop_status": "matched",
+              "bank_name": "bank_name",
               "created_at": "2024-01-15T09:30:00.000Z"
             }
             """;
@@ -118,6 +119,7 @@ public class CreateClientAccountTest : BaseMockServerTest
               },
               "status": "pending",
               "cop_status": "matched",
+              "bank_name": "BARCLAYS BANK UK PLC",
               "created_at": "2024-01-15T10:30:00.000Z"
             }
             """;

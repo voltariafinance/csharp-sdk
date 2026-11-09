@@ -96,6 +96,12 @@ public record ClientAccountResponse : IJsonOnDeserialized
     public CopStatusEnum? CopStatus { get; set; }
 
     /// <summary>
+    /// Bank the sort code belongs to, from the account's Confirmation of Payee check. `null` when no check has named the bank: the account has never been checked, the check does not apply to it, or the provider returned no bank.
+    /// </summary>
+    [JsonPropertyName("bank_name")]
+    public string? BankName { get; set; }
+
+    /// <summary>
     /// Timestamp when the account was created.
     /// </summary>
     [JsonPropertyName("created_at")]
